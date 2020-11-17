@@ -35,11 +35,18 @@ test_that("Print BFS",{
    # Create Board
    board <- getBoard()
    results.bfs <- Practica1::bfs(board)
-   representPath(results.bfs$problem, results.bfs$path)
+   representPath(results.bfs$problem, results.bfs$path)$img
 })
 
 test_that("DFS",{
    # Create Board
    board <- getBoard()
    results.bfs <- Practica1::dfs(board)
+})
+
+test_that("Print DFS",{
+   # Create Board
+   board <- getBoard()
+   results.dfs <- Practica1::dfs(board)
+   representPath(results.dfs$problem, results.dfs$path)$img
 })

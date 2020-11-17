@@ -14,9 +14,6 @@ dfs <- function(problem){
   index <- 1
 
   while (!finalState(problem, current.state) && length(set.open) > 0) {
-     print("NODOS")
-     print(nodos)
-     print(current.state)
     nodos <- nodos + 1
 
     set.closed <- append(set.closed,
@@ -38,15 +35,11 @@ dfs <- function(problem){
     actions = actions(problem, current.state)
 
     for(act in actions){
-       print("CHECK NEW ACTION")
-       print(act)
                                         #Compute next state
       next.state <- nextState(problem, current.state, act)
       next.state$prev <- length(set.closed)
       next.cost <- current.state$cost + costState(problem, next.state)
       next.heuristic <- 0
-      print("NEXT STATE")
-      print(next.state)
                                         # if cost is infinite, then it's an invalid state, so ignore
       if( is.finite(next.cost) ){
         next.node.is.open <- searchList(state = next.state, search.list = set.open)
