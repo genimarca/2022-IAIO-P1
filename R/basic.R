@@ -112,3 +112,13 @@ path <- function(problem, state, closed){
 representPath <- function(problem, path){
    UseMethod("representPath")
 }
+
+#' @title Heuristic for Board Problem
+#'
+#' @param problem Problema a calcular
+#' @param state Estado
+#' @param heuristic.method Método
+#' @export heuristic
+heuristic <- function(problem, state, heuristic.method="ucs"){
+   UseMethod("heuristic")
+}

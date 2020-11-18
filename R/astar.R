@@ -1,17 +1,21 @@
-#' BFS algorithm
+#' A* algorithm
 #' @param problem Problema a buscar
+#' @param heuristic Función heurística
 #' @export
-bfs <- function(problem){
+astar <- function(problem, heuristic.method="ucs"){
   current.state <- initialState(problem)
   set.open <- list(current.state)
   set.open.costs <- c(0)
-  set.open.heuristic <- c(Inf)
+  set.open.heuristic <- c(heuristic(problem, current.state, heuristic.method))
 
   set.closed <- list()
   set.closed.cost <- numeric(0)
 
   nodos <- 0
   index <- 1
+
+                                        # Element in OPEN with smallest cost
+  index = which.min(set.open.costs+set.open.heuristic)
 
   while (!finalState(problem, current.state) && length(set.open) > 0) {
     nodos <- nodos + 1
@@ -38,40 +42,43 @@ bfs <- function(problem){
                                         #Compute next state
       next.state <- nextState(problem, current.state, act)
       next.state$prev <- length(set.closed)
-      next.cost <- next.state$cost #current.state$cost + costState(problem, next.state)
-      next.heuristic <- 0
+      next.cost <- next.state$cost #costState(problem, next.state)
+      next.heuristic <- heuristic(problem, next.state, heuristic.method)
                                         # if cost is infinite, then it's an invalid state, so ignore
       if( is.finite(next.cost) ){
         next.node.is.open <- searchList(state = next.state, search.list = set.open)
         next.node.is.closed <- searchList(state = next.state, search.list = set.closed)
-        # If node is not in OPEN or CLOSED then insert node in OPEN
+                                        # If node is not in OPEN or CLOSED then insert node in OPEN
         if(!next.node.is.open && !next.node.is.closed){
-           problem <- setCost(problem, next.state, next.cost)
+          problem <- setCost(problem, next.state, next.cost)
           set.open <- append(set.open, list(next.state))
           set.open.costs <- c(set.open.costs, next.cost)
           set.open.heuristic <- c(set.open.heuristic, next.heuristic)
         }
-        # else node has already been seen, so check to see if we have found a
-        # better route to it
+                                        # else node has already been seen, so check to see if we have found a
+                                        # better route to it
         else if(next.node.is.open){
           index <- searchList(next.state, set.open)
-          # Update if we have a better route
+                                        # Update if we have a better route
           if(set.open.costs[index] > next.cost){
             problem <- setCost(problem, next.state, next.cost)
-            set.open.costs[index] <- next.cost
+            set.open[[index]]$cost <- next.cost
             set.open[[index]]$prev <- length(set.closed)
-            set.open.heuristic <- next.heuristic
+            set.open.costs[index] <- next.cost
+            set.open.heuristic[index] <- next.heuristic
           }
         }
-        # else node has already been closed, so check to see if we have found a
-        # better route to it
+                                        # else node has already been closed, so check to see if we have found a
+                                        # better route to it
         else{
                                         # Find relevant node in closed
           index <- searchList(next.state, set.closed)
                                         # Update if we have a better route
           if(set.closed.cost[index] > next.cost){
+            print('WARNING: Best route through closed node... Inadmissible heuristic?');
             problem <- setCost(problem, next.state, next.cost)
             set.closed.cost[index] <- next.cost
+            set.closed[[index]]$cost <- next.cost
             set.closed[[index]]$prev <- length(set.closed)
           }
         }
@@ -81,8 +88,8 @@ bfs <- function(problem){
 
     # Element in open with the smallest cost
     if(length(set.open) > 0){
-      index <- 1
-      current.state <- set.open[[1]]
+      index <- which.min(set.open.costs + set.open.heuristic)
+      current.state <- set.open[[index]]
     }
   }
 

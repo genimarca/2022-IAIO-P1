@@ -50,3 +50,16 @@ test_that("Print DFS",{
    results.dfs <- Practica1::dfs(board)
    representPath(results.dfs$problem, results.dfs$path)$img
 })
+
+test_that("ASTAR",{
+   # Create Board
+   board <- getBoard()
+   results.astar <- Practica1::astar(board)
+})
+
+test_that("Print ASTAR",{
+   # Create Board
+   board <- getBoard()
+   results.astar <- Practica1::astar(board, "euclidean")
+   representPath(results.astar$problem, results.astar$path)$img
+})
