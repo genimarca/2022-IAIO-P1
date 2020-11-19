@@ -2,17 +2,20 @@
 % Please edit documentation in R/board.R
 \name{setCost.Board}
 \alias{setCost.Board}
-\title{setCost for Board Problem}
+\title{Establecer el coste para la reconstrucción de un problema de Board}
 \usage{
 \method{setCost}{Board}(problem, state, new.cost)
 }
 \arguments{
 \item{problem}{Problema a resolver}
 
-\item{state}{Estado a cambiar el coste}
+\item{state}{Estado del que se cambia el coste}
 
-\item{new.cost}{Nuevo coste a añadir}
+\item{new.cost}{Coste calculado}
+}
+\value{
+Problema con el coste cambiado
 }
 \description{
-setCost for Board Problem
+Establecer el coste para la reconstrucción de un problema de Board
 }

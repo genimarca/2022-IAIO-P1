@@ -2,15 +2,18 @@
 % Please edit documentation in R/board.R
 \name{actions.Board}
 \alias{actions.Board}
-\title{Get actions for Board Problem}
+\title{Conseguir acciones para un problema de Board}
 \usage{
 \method{actions}{Board}(problem, state)
 }
 \arguments{
-\item{problem}{Board problem}
+\item{problem}{Problema a resolver}
 
 \item{state}{Estado actual del problema}
 }
+\value{
+Posibles acciones
+}
 \description{
-Get actions for Board Problem
+Conseguir acciones para un problema de Board
 }

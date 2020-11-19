@@ -2,15 +2,18 @@
 % Please edit documentation in R/board.R
 \name{finalState.Board}
 \alias{finalState.Board}
-\title{Final State for Board Problem}
+\title{Calcular si un estado es final para un problema Board dado}
 \usage{
 \method{finalState}{Board}(problem, state)
 }
 \arguments{
-\item{problem}{Problema a resolver}
+\item{problem}{Problema a comprobar}
 
 \item{state}{Estado a comparar si es final}
 }
+\value{
+Comprobación del estado
+}
 \description{
-Final State for Board Problem
+Calcular si un estado es final para un problema Board dado
 }

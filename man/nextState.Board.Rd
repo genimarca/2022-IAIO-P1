@@ -2,7 +2,7 @@
 % Please edit documentation in R/board.R
 \name{nextState.Board}
 \alias{nextState.Board}
-\title{Next State for Board Problem}
+\title{Calcular el siguiente estado para un problema de Board}
 \usage{
 \method{nextState}{Board}(problem, state, action)
 }
@@ -13,6 +13,9 @@
 
 \item{action}{Accion tomada}
 }
+\value{
+Nuevo estado
+}
 \description{
-Next State for Board Problem
+Calcular el siguiente estado para un problema de Board
 }

@@ -2,15 +2,18 @@
 % Please edit documentation in R/board.R
 \name{costState.Board}
 \alias{costState.Board}
-\title{costState for Board Problem}
+\title{Calcular coste para un estado de un problema de Board}
 \usage{
 \method{costState}{Board}(problem, state)
 }
 \arguments{
 \item{problem}{Problema a resolver}
 
-\item{state}{Estado a calcular el coste}
+\item{state}{Estado del que se va a calcular el coste}
+}
+\value{
+Coste del estado dado
 }
 \description{
-costState for Board Problem
+Calcular coste para un estado de un problema de Board
 }

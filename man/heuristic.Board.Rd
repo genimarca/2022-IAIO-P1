@@ -2,7 +2,7 @@
 % Please edit documentation in R/board.R
 \name{heuristic.Board}
 \alias{heuristic.Board}
-\title{Heuristic for Board Problem}
+\title{Método heurístico para problema de Board}
 \usage{
 \method{heuristic}{Board}(problem, state, heuristic.method)
 }
@@ -11,8 +11,8 @@
 
 \item{state}{Estado}
 
-\item{heuristic.method}{Método}
+\item{heuristic.method}{Método heurístico}
 }
 \description{
-Heuristic for Board Problem
+Método heurístico para problema de Board
 }

@@ -83,7 +83,6 @@ dfs <- function(problem){
           }
         }
       }
-
     }
 
     # Element in open with the smallest cost

@@ -1,4 +1,4 @@
-#' @title Mostrar gráfico con solución de un problema Board
+#' @title Mostrar gráfico con solución de un problema MultiBoard
 #'
 #' @param problem Problema a representar
 #' @param path Camino de la solución encontrada
@@ -6,16 +6,14 @@
 #' @importFrom magrittr `%>%`
 #' @importFrom rlang .data
 #' @export
-#' @method representPath Board
-representPath.Board <- function(problem, path){
+#' @method representPath MultiBoard
+representPath.MultiBoard <- function(problem, path){
    # Board
    p.board <- problem$board %>%
       reshape2::melt() %>%
       dplyr::mutate(value=dplyr::case_when(value == Inf ~ NaN,
                                            TRUE ~ 0))
    colnames(p.board) <- c("X", "Y", "value")
-   nrow.board <- nrow(problem$board)
-   ncol.board <- ncol(problem$board)
 
    # Cost
    cost.tiles <- problem$cost.matrix %>% reshape2::melt()
@@ -50,8 +48,8 @@ representPath.Board <- function(problem, path){
       ggplot2::scale_color_gradientn(colours = c("white", "white", "palegreen", "darkgreen"),
                                      values = scales::rescale(c(0,0.1,1,n.pasos),to=c(0,1)),
                                      na.value = "grey") +
-      ggplot2::scale_x_continuous(breaks=1:ncol.board, labels = 1:ncol.board, minor_breaks = NULL) +
-      ggplot2::scale_y_continuous(breaks=1:nrow.board, labels = 1:nrow.board, minor_breaks = NULL)
+      ggplot2::scale_x_continuous(breaks=1:10, labels = 1:10, minor_breaks = NULL) +
+      ggplot2::scale_y_continuous(breaks=1:10, labels = 1:10, minor_breaks = NULL)
    gif <- img +
       gganimate::transition_states(.data$pasos)
 

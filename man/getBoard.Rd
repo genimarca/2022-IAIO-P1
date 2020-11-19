@@ -2,13 +2,16 @@
 % Please edit documentation in R/board.R
 \name{getBoard}
 \alias{getBoard}
-\title{Get Definition of Board Problem}
+\title{Construir Board}
 \usage{
 getBoard(n = 10)
 }
 \arguments{
-\item{n}{Length of the board}
+\item{n}{Longitud del tablero cuadrado}
+}
+\value{
+Problema Board
 }
 \description{
-Get Definition of Board Problem
+Construir Board
 }

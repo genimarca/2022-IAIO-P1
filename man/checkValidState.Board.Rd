@@ -2,7 +2,7 @@
 % Please edit documentation in R/board.R
 \name{checkValidState.Board}
 \alias{checkValidState.Board}
-\title{Check State for Board Problem}
+\title{Comprobar validez de un estado de un problema de Board}
 \usage{
 \method{checkValidState}{Board}(problem, state, action)
 }
@@ -11,8 +11,11 @@
 
 \item{state}{Estado actual}
 
-\item{action}{Accion tomada}
+\item{action}{Última accion tomada}
+}
+\value{
+Estado corregido para ser válida
 }
 \description{
-Check State for Board Problem
+Comprobar validez de un estado de un problema de Board
 }

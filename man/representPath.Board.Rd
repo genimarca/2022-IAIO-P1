@@ -2,15 +2,15 @@
 % Please edit documentation in R/representPath_Board.R
 \name{representPath.Board}
 \alias{representPath.Board}
-\title{Represent Solution for Board Problem}
+\title{Mostrar gráfico con solución de un problema Board}
 \usage{
 \method{representPath}{Board}(problem, path)
 }
 \arguments{
 \item{problem}{Problema a representar}
 
-\item{path}{Camino de la solución}
+\item{path}{Camino de la solución encontrada}
 }
 \description{
-Represent Solution for Board Problem
+Mostrar gráfico con solución de un problema Board
 }

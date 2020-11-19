@@ -2,13 +2,16 @@
 % Please edit documentation in R/board.R
 \name{initialState.Board}
 \alias{initialState.Board}
-\title{Initial State for Board Problem}
+\title{Estado inicial para un problema de Board}
 \usage{
 \method{initialState}{Board}(problem)
 }
 \arguments{
-\item{problem}{Problema para obtener el estado inicial}
+\item{problem}{Problema a resolver}
+}
+\value{
+Estado inicial para el problema dado
 }
 \description{
-Initial State for Board Problem
+Estado inicial para un problema de Board
 }

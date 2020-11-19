@@ -1,14 +1,14 @@
 library(Practica1)
-context("Board Problem")
+context("MultiBoard Problem")
 
-test_that("Create Board Problem", {
+test_that("Create MultiBoard Problem", {
 
    # Create Board
-   board <- getBoard()
+   board <- getMultiBoard(n = 12)
 
    # Check Initial State
    initial.state <- initialState(board)
-   expect_equal(initial.state$position, c(2,2))
+   expect_equal(initial.state$position, c(10,10))
    expect_equal(initial.state$cost, 0)
    expect_equal(initial.state$prev, 0)
 
@@ -25,25 +25,25 @@ test_that("Create Board Problem", {
 
 })
 
-test_that("Print BFS",{
+test_that("Print BFS MultiBoard",{
    # Create Board
-   board <- getBoard()
+   board <- getMultiBoard()
    results.bfs <- Practica1::bfs(board)
    representPath(results.bfs$problem, results.bfs$path)$img
    expect_true(results.bfs$completed)
 })
 
-test_that("Print DFS",{
+test_that("Print DFS MultiBoard",{
    # Create Board
-   board <- getBoard()
+   board <- getMultiBoard()
    results.dfs <- Practica1::dfs(board)
    representPath(results.dfs$problem, results.dfs$path)$img
    expect_true(results.dfs$completed)
 })
 
-test_that("Print ASTAR",{
+test_that("Print ASTAR MultiBoard",{
    # Create Board
-   board <- getBoard()
+   board <- getMultiBoard()
    results.astar <- Practica1::astar(board, "euclidean")
    representPath(results.astar$problem, results.astar$path)$img
    expect_true(results.astar$completed)

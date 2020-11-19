@@ -2,7 +2,7 @@
 % Please edit documentation in R/board.R
 \name{sameState.BoardState}
 \alias{sameState.BoardState}
-\title{Same State for Board Problem}
+\title{Comparación de la igualdad de dos estados de Board}
 \usage{
 \method{sameState}{BoardState}(state1, state2)
 }
@@ -11,6 +11,9 @@
 
 \item{state2}{Estado 2 a comparar}
 }
+\value{
+Comprobación de la igualdad de dos estados
+}
 \description{
-Same State for Board Problem
+Comparación de la igualdad de dos estados de Board
 }
