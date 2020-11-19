@@ -27,7 +27,7 @@ test_that("Print BFS NQueens",{
    # Create NQueens
    problem <- getNQueens()
    results.bfs.nqueens <- Practica1::bfs(problem)
-   representPath(results.bfs$problem, results.bfs$path)$img
+   representPath(results.bfs.nqueens$problem, results.bfs.nqueens$path)$img
    expect_true(results.bfs$completed)
 })
 
