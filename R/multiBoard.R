@@ -3,7 +3,7 @@
 #' @param n Longitud del tablero cuadrado
 #' @return Problema MultiBoard
 #' @export
-getMultiBoard <- function(n = 12){
+getMultiBoard <- function(n = 20){
    start <- c(10, 10)
    goals <- data.frame(X=c(2,2,n-1,n-1), Y=c(2,n-1,2,n-1))
 
@@ -11,11 +11,13 @@ getMultiBoard <- function(n = 12){
    board[start[1], start[2]] <- 0
    board[c(1, n), ] <- Inf
    board[ , c(1, n)] <- Inf
+   board[c(4, 16), c(4:8, 13:16)] <- Inf
+   board[c(4:8, 13:16), c(4, 16)] <- Inf
+   board[9:13, c(8,12)] <- Inf
+   board[13, 8:12] <- Inf
 
-   cost.matrix <- matrix(NA, nrow = n, ncol = n)
-   cost.matrix[start[1], start[2]] <- 0
-   cost.matrix[c(1, n), ] <- Inf
-   cost.matrix[ , c(1, n)] <- Inf
+   cost.matrix <- board
+   cost.matrix[cost.matrix==1] <- NA
 
    problem <- list("board"=board,
                    "start"=start,
@@ -126,7 +128,7 @@ nextState.MultiBoard <- function(problem, state, action){
 
    new.state$cost <- new.state$cost + costState(problem, new.state)
    new.state$prev <- 0
-   new.state
+
    found.new.goals <- apply(problem$goals, 1, function(x){
      all(new.state$position == x)
    })
@@ -169,21 +171,22 @@ sameState.MultiBoardState <- function(state1, state2){
 #' @export
 #' @method heuristic MultiBoard
 heuristic.MultiBoard <- function(problem, state, heuristic.method){
-  heuristic.value <- switch(
-    heuristic.method,
-    "euclidean" = min(apply(problem$goals, 1, function(x){
-      sqrt(sum(state$position-problem$goal)**2)
-    })),
-    "euclidean2" = min(apply(problem$goals, 1, function(x){
-      sum(state$position-problem$goal)**2
-    })),
-    "manhattan" = min(apply(problem$goals, 1, function(x){
-      sum(abs(state$position-problem$goal))
-    })),
-    "chessboard" = min(apply(problem$goals, 1, function(x){
-      max(abs(state$position-problem$goal))
-    })),
-    "ucs" = 0
-  )
-   return(heuristic.value)
+  unfound.goals <- problem$goals[!state$found.goals, ]
+  heuristic.value <- ifelse(nrow(unfound.goals) == 0, 0,
+         switch(heuristic.method,
+           "euclidean" = min(apply(unfound.goals, 1, function(x){
+             sqrt(sum(state$position-problem$goal)**2)
+           })),
+           "euclidean2" = min(apply(unfound.goals, 1, function(x){
+             sum(state$position-problem$goal)**2
+           })),
+           "manhattan" = min(apply(unfound.goals, 1, function(x){
+             sum(abs(state$position-problem$goal))
+           })),
+           "chessboard" = min(apply(unfound.goals, 1, function(x){
+             max(abs(state$position-problem$goal))
+           })),
+           "ucs" = 0
+         ))
+  return(heuristic.value)
 }

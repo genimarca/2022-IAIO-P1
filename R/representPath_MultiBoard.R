@@ -41,15 +41,25 @@ representPath.MultiBoard <- function(problem, path){
       gif.board <- rbind(gif.board, p.board)
    }
 
+   gif.board <- gif.board %>%
+      dplyr::mutate(Symbol = dplyr::case_when(
+         X==problem$start[1] & Y==problem$start[2] ~ "\U0001f3e0",
+         X==problem$goals[1,1] & Y==problem$goals[1,2] ~ "\U0001f3c1",
+         X==problem$goals[2,1] & Y==problem$goals[2,2] ~ "\U0001f3c1",
+         X==problem$goals[3,1] & Y==problem$goals[3,2] ~ "\U0001f3c1",
+         X==problem$goals[4,1] & Y==problem$goals[4,2] ~ "\U0001f3c1",
+         TRUE ~ ""))
+
    img <- ggplot2::ggplot(gif.board, ggplot2::aes(x=.data$X, y=.data$Y, fill=.data$cost, color=.data$value)) +
       ggplot2::geom_tile(ggplot2::aes(width=0.95, height=0.9), size=1.8) +
-      ggplot2::scale_fill_gradient2(low = "red", mid = "yellow", midpoint = midcost, na.value = "grey",
-                                    high = "darkblue", space = "Lab") +
+      ggplot2::scale_fill_gradient2(low = "darkblue", mid = "yellow", midpoint = midcost, na.value = "grey",
+                                    high = "red", space = "Lab") +
       ggplot2::scale_color_gradientn(colours = c("white", "white", "palegreen", "darkgreen"),
                                      values = scales::rescale(c(0,0.1,1,n.pasos),to=c(0,1)),
                                      na.value = "grey") +
-      ggplot2::scale_x_continuous(breaks=1:10, labels = 1:10, minor_breaks = NULL) +
-      ggplot2::scale_y_continuous(breaks=1:10, labels = 1:10, minor_breaks = NULL)
+      ggplot2::geom_text(ggplot2::aes(label=.data$Symbol), color="black") +
+      ggplot2::scale_x_continuous(breaks=1:ncol(problem$board), labels = 1:ncol(problem$board), minor_breaks = NULL) +
+      ggplot2::scale_y_continuous(breaks=1:nrow(problem$board), labels = 1:nrow(problem$board), minor_breaks = NULL)
    gif <- img +
       gganimate::transition_states(.data$pasos)
 

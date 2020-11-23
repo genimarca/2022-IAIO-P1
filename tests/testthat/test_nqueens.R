@@ -14,11 +14,11 @@ test_that("Create NQueens Problem", {
    expect_true(sameState(initial.state, initial.state))
 
    # New state
-   possible.actions <- actions(board, initial.state)
-   expect_equal(length(possible.actions), 4)
+   possible.actions <- actions(problem, initial.state)
+   expect_equal(length(possible.actions), 64)
 
    # Next State
-   next.state <- nextState(board, initial.state, possible.actions[1])
+   next.state <- nextState(problem, initial.state, possible.actions[[1]])
    expect_false(sameState(initial.state, next.state))
 
 })
@@ -27,8 +27,8 @@ test_that("Print BFS NQueens",{
    # Create NQueens
    problem <- getNQueens()
    results.bfs.nqueens <- Practica1::bfs(problem)
-   representPath(results.bfs.nqueens$problem, results.bfs.nqueens$path)$img
-   expect_true(results.bfs$completed)
+   representPath(results.bfs.nqueens$problem, results.bfs.nqueens$path)
+   expect_true(results.bfs.nqueens$completed)
 })
 
 
@@ -36,6 +36,23 @@ test_that("Print DFS NQueens",{
    # Create NQueens
    problem <- getNQueens()
    results.dfs.nqueens <- Practica1::dfs(problem)
-   representPath(results.bfs$problem, results.bfs$path)$img
-   expect_true(results.bfs$completed)
+   representPath(results.dfs.nqueens$problem, results.dfs.nqueens$path)
+   expect_true(results.dfs.nqueens$completed)
 })
+
+test_that("Print A* basic NQueens",{
+   # Create NQueens
+   problem <- getNQueens(n=6)
+   results.astar.nqueens <- Practica1::astar(problem, "basic")
+   representPath(results.astar.nqueens$problem, results.astar.nqueens$path)
+   expect_true(results.astar.nqueens$completed)
+})
+
+test_that("Print A* ucs NQueens",{
+   # Create NQueens
+   problem <- getNQueens(n=6)
+   results.astar.nqueens <- Practica1::astar(problem, "ucs")
+   representPath(results.astar.nqueens$problem, results.astar.nqueens$path)
+   expect_true(results.astar.nqueens$completed)
+})
+

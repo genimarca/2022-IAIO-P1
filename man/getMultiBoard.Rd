@@ -4,7 +4,7 @@
 \alias{getMultiBoard}
 \title{Construir MultiBoard}
 \usage{
-getMultiBoard(n = 12)
+getMultiBoard(n = 20)
 }
 \arguments{
 \item{n}{Longitud del tablero cuadrado}

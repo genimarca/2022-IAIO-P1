@@ -11,7 +11,7 @@
 
 \item{state}{Estado}
 
-\item{heuristic.method}{Método heurístico}
+\item{heuristic.method}{Método heurístico. Posibles acciones: euclidean, euclidean2, manhattan, chessboard, ucs}
 }
 \description{
 Método heurístico para problema de Board

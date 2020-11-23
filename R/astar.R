@@ -1,6 +1,6 @@
 #' A* algorithm
 #' @param problem Problema a buscar
-#' @param heuristic Función heurística
+#' @param heuristic.method Función heurística
 #' @export
 astar <- function(problem, heuristic.method="ucs"){
   current.state <- initialState(problem)
@@ -20,10 +20,8 @@ astar <- function(problem, heuristic.method="ucs"){
   while (!finalState(problem, current.state) && length(set.open) > 0) {
     nodos <- nodos + 1
 
-    set.closed <- append(set.closed,
-                         list(set.open[[index]]))
-    set.closed.cost <- append(set.closed.cost,
-                              set.open.costs[[index]])
+    set.closed <- append(set.closed, list(current.state))
+    set.closed.cost <- c(set.closed.cost, current.state$cost)
 
                                         # Update Open
     set.open[[index]] <- NULL

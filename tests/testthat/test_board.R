@@ -41,10 +41,43 @@ test_that("Print DFS",{
    expect_true(results.dfs$completed)
 })
 
-test_that("Print ASTAR",{
+test_that("Print ASTAR euclidean",{
    # Create Board
    board <- getBoard()
    results.astar <- Practica1::astar(board, "euclidean")
+   representPath(results.astar$problem, results.astar$path)$img
+   expect_true(results.astar$completed)
+})
+
+test_that("Print ASTAR euclidean2",{
+   # Create Board
+   board <- getBoard()
+   results.astar <- Practica1::astar(board, "euclidean2")
+   representPath(results.astar$problem, results.astar$path)$img
+   expect_true(results.astar$completed)
+})
+
+test_that("Print ASTAR manhattan",{
+   # Create Board
+   board <- getBoard()
+   results.astar <- Practica1::astar(board, "manhattan")
+   representPath(results.astar$problem, results.astar$path)$img
+   expect_true(results.astar$completed)
+})
+
+test_that("Print ASTAR chessboard",{
+   # Create Board
+   board <- getBoard()
+   results.astar <- Practica1::astar(board, "chessboard")
+   representPath(results.astar$problem, results.astar$path)$img
+   expect_true(results.astar$completed)
+})
+
+
+test_that("Print ASTAR ucs",{
+   # Create Board
+   board <- getBoard()
+   results.astar <- Practica1::astar(board, "ucs")
    representPath(results.astar$problem, results.astar$path)$img
    expect_true(results.astar$completed)
 })

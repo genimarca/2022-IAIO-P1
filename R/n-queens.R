@@ -21,7 +21,7 @@ getNQueens <- function(n = 8){
 initialState.NQueens <- function(problem){
    state <- list()
    state$board <- rep(0, problem$n)
-   state$cost <- costState(problem, state)
+   state$cost <- 0
    state$prev <- 0
 
    class(state) <- c("NQueensState")
@@ -58,7 +58,7 @@ costState.NQueens <- function(problem, state){
       return(any(diag))
     }
   })
-  return(ifelse(same.column || any(diag), Inf, n.settled.queens))
+  return(ifelse(same.column || any(diag), Inf, 1))
 }
 
 #' @title Establecer el coste para la reconstrucción de un problema de n-reinas
@@ -85,13 +85,15 @@ setCost.NQueens <- function(problem, state, new.cost){
 #' @export
 #' @method actions NQueens
 actions.NQueens<- function(problem, state){
-  to.fill <- which(state$board == 0)[1]
-  actions <- list()
   n <- problem$n
 
-  for(i in 1:n){
-    actions <- append(actions, list(c(to.fill, i)))
-  }
+  to.fill <- which(state$board == 0)
+  in.board <- 1:n %in% state$board
+
+  add.queen <- expand.grid(to.fill, (1:n)[!in.board])
+  remove.queen <- expand.grid(c(0), which(state$board != 0))
+
+  actions <- rbind(remove.queen, add.queen) %>% split(., seq(nrow(.)))
   return(actions)
 }
 
@@ -105,9 +107,9 @@ actions.NQueens<- function(problem, state){
 #' @method nextState NQueens
 nextState.NQueens <- function(problem, state, action){
    new.state <- state
-   new.state$board[action[1]] <- action[2]
+   new.state$board[action[,1]] <- action[,2]
 
-   new.state$cost <- costState(problem, new.state)
+   new.state$cost <- new.state$cost + costState(problem, new.state)
    new.state$prev <- 0
 
    return(new.state)
@@ -136,3 +138,20 @@ sameState.NQueensState <- function(state1, state2){
    same <- all(state1$board == state2$board)
    return(same)
 }
+
+#' @title Método heurístico para problema de n-reinas
+#'
+#' @param problem Problema a calcular
+#' @param state Estado
+#' @param heuristic.method Método
+#' @export
+#' @method heuristic NQueens
+heuristic.NQueens <- function(problem, state, heuristic.method){
+  n.to.fill <- sum(state$board == 0)
+  n.to.fill <- ifelse(n.to.fill == 1, 0, n.to.fill)
+  heuristic.value <- switch(heuristic.method,
+                            "basic" = n.to.fill,
+                            "ucs" = 0)
+  return(heuristic.value)
+}
+

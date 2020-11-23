@@ -160,7 +160,7 @@ sameState.BoardState <- function(state1, state2){
 #'
 #' @param problem Problema a calcular
 #' @param state Estado
-#' @param heuristic.method Método heurístico
+#' @param heuristic.method Método heurístico. Posibles acciones: euclidean, euclidean2, manhattan, chessboard, ucs
 #' @export
 #' @method heuristic Board
 heuristic.Board <- function(problem, state, heuristic.method){

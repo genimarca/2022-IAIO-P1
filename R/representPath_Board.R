@@ -4,7 +4,8 @@
 #' @param path Camino de la solución encontrada
 #' @importFrom dplyr `case_when`
 #' @importFrom magrittr `%>%`
-#' @importFrom rlang .data
+#' @importFrom scales `rescale`
+#' @importFrom rlang `.data`
 #' @export
 #' @method representPath Board
 representPath.Board <- function(problem, path){
@@ -43,13 +44,20 @@ representPath.Board <- function(problem, path){
       gif.board <- rbind(gif.board, p.board)
    }
 
+   gif.board <- gif.board %>%
+      dplyr::mutate(Symbol = dplyr::case_when(
+         X==problem$start[1] & Y==problem$start[2] ~ "\U0001f3e0",
+         X==problem$goal[1] & Y==problem$goal[2] ~ "\U0001f3c1",
+         TRUE ~ ""))
+
    img <- ggplot2::ggplot(gif.board, ggplot2::aes(x=.data$X, y=.data$Y, fill=.data$cost, color=.data$value)) +
       ggplot2::geom_tile(ggplot2::aes(width=0.95, height=0.9), size=1.8) +
-      ggplot2::scale_fill_gradient2(low = "red", mid = "yellow", midpoint = midcost, na.value = "grey",
-                                    high = "darkblue", space = "Lab") +
+      ggplot2::scale_fill_gradient2(low = "darkblue", mid = "yellow", midpoint = midcost, na.value = "grey",
+                                    high = "red", space = "Lab") +
       ggplot2::scale_color_gradientn(colours = c("white", "white", "palegreen", "darkgreen"),
                                      values = scales::rescale(c(0,0.1,1,n.pasos),to=c(0,1)),
                                      na.value = "grey") +
+      ggplot2::geom_text(ggplot2::aes(label=.data$Symbol), color="black") +
       ggplot2::scale_x_continuous(breaks=1:ncol.board, labels = 1:ncol.board, minor_breaks = NULL) +
       ggplot2::scale_y_continuous(breaks=1:nrow.board, labels = 1:nrow.board, minor_breaks = NULL)
    gif <- img +

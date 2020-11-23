@@ -4,7 +4,7 @@ context("MultiBoard Problem")
 test_that("Create MultiBoard Problem", {
 
    # Create Board
-   board <- getMultiBoard(n = 12)
+   board <- getMultiBoard()
 
    # Check Initial State
    initial.state <- initialState(board)
@@ -41,10 +41,42 @@ test_that("Print DFS MultiBoard",{
    expect_true(results.dfs$completed)
 })
 
-test_that("Print ASTAR MultiBoard",{
+test_that("Print ASTAR MultiBoard euclidean",{
    # Create Board
    board <- getMultiBoard()
    results.astar <- Practica1::astar(board, "euclidean")
+   representPath(results.astar$problem, results.astar$path)$img
+   expect_true(results.astar$completed)
+})
+
+test_that("Print ASTAR MultiBoard euclidean2",{
+   # Create Board
+   board <- getMultiBoard()
+   results.astar <- Practica1::astar(board, "euclidean2")
+   representPath(results.astar$problem, results.astar$path)$img
+   expect_true(results.astar$completed)
+})
+
+test_that("Print ASTAR MultiBoard manhattan",{
+   # Create Board
+   board <- getMultiBoard()
+   results.astar <- Practica1::astar(board, "manhattan")
+   representPath(results.astar$problem, results.astar$path)$img
+   expect_true(results.astar$completed)
+})
+
+test_that("Print ASTAR MultiBoard chessboard",{
+   # Create Board
+   board <- getMultiBoard()
+   results.astar <- Practica1::astar(board, "chessboard")
+   representPath(results.astar$problem, results.astar$path)$img
+   expect_true(results.astar$completed)
+})
+
+test_that("Print ASTAR MultiBoard ucs",{
+   # Create Board
+   board <- getMultiBoard()
+   results.astar <- Practica1::astar(board, "ucs")
    representPath(results.astar$problem, results.astar$path)$img
    expect_true(results.astar$completed)
 })

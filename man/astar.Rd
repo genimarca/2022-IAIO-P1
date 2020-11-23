@@ -9,7 +9,7 @@ astar(problem, heuristic.method = "ucs")
 \arguments{
 \item{problem}{Problema a buscar}
 
-\item{heuristic}{Función heurística}
+\item{heuristic.method}{Función heurística}
 }
 \description{
 A* algorithm

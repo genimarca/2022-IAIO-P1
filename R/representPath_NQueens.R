@@ -13,7 +13,7 @@ representPath.NQueens <- function(problem, path){
    last.step <- path[[length(path)]]$board
    last.step.melt <- sapply(1:problem$n, function(x) c(x,last.step[x])) %>% t() %>% as.data.frame()
    colnames(last.step.melt) <- c("X", "Y")
-   last.step.melt$Queen <- "♛"
+   last.step.melt$Queen <- "\u265b"
 
 
    cost.board <- problem$cost.matrix %>% reshape2::melt()
@@ -21,7 +21,7 @@ representPath.NQueens <- function(problem, path){
 
 
    p.board <- dplyr::left_join(cost.board, last.step.melt, by=c("X","Y")) %>%
-      mutate(Queen = case_when(is.na(Queen) ~ "", TRUE ~ Queen))
+      dplyr::mutate(Queen = case_when(is.na(Queen) ~ "", TRUE ~ Queen))
 
    img <- ggplot2::ggplot(p.board, ggplot2::aes(x=.data$X, y=.data$Y, fill=.data$value)) +
       ggplot2::geom_tile(color="black") +
