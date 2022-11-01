@@ -27,7 +27,7 @@ El nombre de la librería/paquete es Practica1. Para poder ejecutar todas las fu
 
 ```r
 library("Practica1")
-``
+```
 
 Obtención de la representación de un problema:
 
