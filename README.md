@@ -17,8 +17,8 @@ También se incluye la implementación en R de un ejemplo de resolución de los 
 Puede instalar las implementaciones en R indicadas a través del paquete devtools de R:
 
 ```r
-	install.packages("devtools")
-	devtools::install_github("genimarca/2022-IAIO-P1")
+install.packages("devtools")
+devtools::install_github("genimarca/2022-IAIO-P1")
 ```
 
 ## Ejecución
@@ -27,22 +27,22 @@ El nombre de la librería/paquete es Practica1. Para poder ejecutar todas las fu
 
 ```r
 library("Practica1")
-```
+``
 
 Obtención de la representación de un problema:
 
 ```r
-	getBoard()
-	getMultiBoard()
-	getNQueens()
+getBoard()
+getMultiBoard()
+getNQueens()
 ```
 
 Ejecución de los algoritmos de búsqueda disponibles:
 
 ```r
-	bfs()
-	dfs()
-	astar()
+bfs()
+dfs()
+astar()
 ```
 
 Nota: El algoritmo A\* tiene dos parámetros de entrada:
@@ -63,9 +63,9 @@ La visualización el camino desde el estado final al objetivo se realiza con la 
 Ejemplo de uso para resolver un problema de búsqueda simple y conseguir una representación gráfica:
 
 ```r
-	board <- getBoard()
-	results.bfs <- bfs(board)
-	representPath(results.bfs$problem, results.bfs$path)$img
+board <- getBoard()
+results.bfs <- bfs(board)
+representPath(results.bfs$problem, results.bfs$path)$img
 ```
 
 #### Créditos
