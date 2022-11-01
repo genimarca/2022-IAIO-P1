@@ -16,8 +16,10 @@ También se incluye la implementación en R de un ejemplo de resolución de los 
 
 Puede instalar las implementaciones en R indicadas a través del paquete devtools de R:
 
+```r
 	install.packages("devtools")
 	devtools::install_github("genimarca/2022-IAIO-P1")
+```
 
 ## Ejecución
 
