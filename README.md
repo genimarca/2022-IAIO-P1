@@ -62,4 +62,4 @@ Ejemplo de uso para resolver un problema de búsqueda simple y conseguir una rep
 
 #### Créditos
 
-El material original fue preparado por Jacinto Carrasco Castillo ([@JacintoCC](https://github.com/JacintoCC)) para la asignatura de IA en Investigación Operativa del Grado de Estadística de la Universidad de Granada.
+El material original fue preparado por Jacinto Carrasco Castillo ([@JacintoCC](https://github.com/JacintoCC)) para la asignatura de IA en Investigación Operativa del Grado de Estadística de la Universidad de Granada adscrita al departamento de Ciencias de la Computación e Inteligencia Artificial.
