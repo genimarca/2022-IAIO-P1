@@ -23,6 +23,12 @@ Puede instalar las implementaciones en R indicadas a través del paquete devtool
 
 ## Ejecución
 
+El nombre de la librería/paquete es Practica1. Para poder ejecutar todas las funciones de la librería sin tener que indicar siempre su nombre debe primeramente cargar la librería en memoria:
+
+```r
+library("Practica1")
+```
+
 Obtención de la representación de un problema:
 
 ```r
